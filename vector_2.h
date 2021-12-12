@@ -18,6 +18,7 @@ typedef struct vector_2{
     void (*print)(struct vector_2*);
     void (*clear_vector)(struct vector_2*);
     void (*to_string)(struct vector_2*);
+    void (*get_sub_element)(const struct vector_2*, struct vector_2*, double*);
 }vector_2;
 
 void configure_vector_2(vector_2* v);

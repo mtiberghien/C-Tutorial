@@ -93,6 +93,7 @@ void exercice_3()
 //Understand polymorphism
 void exercice_4()
 {
+    printf("Vector 3D:\n");
     vector_2* v = build_vector_2(Three, (int[]){2,3,4});
     int index=0;
     for(double* i=v->get_first(v);i<=v->get_last(v);i=v->get_next(i))
@@ -100,6 +101,28 @@ void exercice_4()
         (*i)=++index;
     }
     v->to_string(v);
+    printf("Value at [0,1,2]:%lf\n", *v->get_element_at(v, (int[]){0,1,2}));
+    v->clear_vector(v);
+    free(v);
+    printf("Vector 2D:\n");
+    v = build_vector_2(Two, (int[]){3,3});
+    index=0;
+    for(double* i=v->get_first(v);i<=v->get_last(v);i=v->get_next(i))
+    {
+        (*i)=++index;
+    }
+    v->to_string(v);
+    printf("Value at [1,1]:%lf\n", *v->get_element_at(v, (int[]){1,1}));
+    v->clear_vector(v);
+    printf("Vector 1D:\n");
+    v = build_vector_2(One, (int[]){10});
+    index=0;
+    for(double* i=v->get_first(v);i<=v->get_last(v);i=v->get_next(i))
+    {
+        (*i)=++index;
+    }
+    v->to_string(v);
+    printf("Value at [4]:%lf\n", *v->get_element_at(v, (int[]){5}));
     v->clear_vector(v);
     free(v);
 }

@@ -119,6 +119,14 @@ void clear_vector_2(vector_2* v)
     v->values=NULL;
 }
 
+void get_sub_element(const vector_2* v, vector_2* sub_element, double* iterator)
+{
+    sub_element->dim = v->dim-1;
+    sub_element->shape=(v->shape+1);
+    sub_element->values=iterator;
+    configure_vector_2(sub_element);
+}
+
 void print_1D(vector_2* v)
 {
     printf("[");
@@ -141,10 +149,7 @@ void print_2D(vector_2* v)
     for(double* i=v->get_first(v);i<=last;i=v->get_next_at_axis(v,i, One))
     {
         vector_2 v1;
-        v1.dim= One;
-        v1.shape=(v->shape+1);
-        v1.values=i;
-        configure_vector_2(&v1);
+        v->get_sub_element(v,&v1, i);
         print_1D(&v1);
         if(i!=last)
         {
@@ -161,10 +166,7 @@ void print_3D(vector_2* v)
     for(double* i=v->get_first(v);i<=last;i=v->get_next_at_axis(v,i, One))
     {
         vector_2 v2;
-        v2.dim= Two;
-        v2.shape=(v->shape+1);
-        v2.values=i;
-        configure_vector_2(&v2);
+        v->get_sub_element(v,&v2,i);
         print_2D(&v2);
         if(i!=last)
         {
@@ -220,6 +222,7 @@ void configure_vector_2(vector_2* v)
     v->clear_vector=clear_vector_2;
     v->get_element_at = get_vector_2_element_at;
     v->to_string = to_string_vector_2;
+    v->get_sub_element=get_sub_element;
 }
 
 vector_2* build_vector_2(dimension dim, int* shape)
